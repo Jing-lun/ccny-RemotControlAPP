@@ -1,0 +1,4 @@
+#Fri Nov 02 00:02:29 EDT 2018
+base.0=/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/transforms/dexMerger/debug/42
+path.0=classes.dex
+renamed.0=classes.dex

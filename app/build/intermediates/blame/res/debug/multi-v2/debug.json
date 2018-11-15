@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "3,4,2,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "96,142,55,194",
+                        "endColumns": "45,51,40,74",
+                        "endOffsets": "137,189,91,264"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,101,153,194",
+                        "endColumns": "45,51,40,74",
+                        "endOffsets": "96,148,189,264"
+                    }
+                }
+            ]
+        }
+    ]
+}

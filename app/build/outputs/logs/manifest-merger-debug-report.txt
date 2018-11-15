@@ -1,0 +1,117 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:2:1-47:12
+	package
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:3:5-25
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:3:50-75
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:3:26-49
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:5:5-84
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:6:5-96
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:6:22-76
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:7:5-96
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:7:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:8:5-93
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:8:22-73
+uses-permission#android.permission.VIBRATE
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:10:5-83
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:10:22-63
+uses-sdk
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:12:5-42
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:12:5-42
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:12:5-42
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:12:5-42
+INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:12:5-42
+	android:targetSdkVersion
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:12:5-42
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:12:15-40
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+		INJECTED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml
+application
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:14:5-45:19
+	android:label
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:16:9-41
+	android:icon
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:15:9-38
+activity#com.fei435.Splash
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:17:9-25:20
+	android:screenOrientation
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:20:13-50
+	android:label
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:19:13-45
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:18:13-45
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:21:13-24:29
+action#android.intent.action.MAIN
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:22:17-69
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:22:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:23:27-74
+activity#com.fei435.WifiCarSettings
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:26:9-30:20
+	android:screenOrientation
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:29:13-50
+	android:label
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:28:13-69
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:27:13-54
+activity#com.fei435.Main
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:32:9-36:20
+	android:screenOrientation
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:35:13-50
+	android:label
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:34:13-45
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:33:13-43
+receiver#com.fei435.HanryReceiver
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:38:9-44:14
+	android:exported
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:38:59-83
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:38:19-58
+intent-filter#action:name:fei435.recording_start+action:name:fei435.recording_stop+action:name:fei435.take_picture_done
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:39:7-43:23
+action#fei435.take_picture_done
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:40:11-61
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:40:19-58
+action#fei435.recording_start
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:41:11-59
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:41:19-56
+action#fei435.recording_stop
+ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:42:11-58
+	android:name
+		ADDED from /home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/AndroidManifest.xml:42:19-55
