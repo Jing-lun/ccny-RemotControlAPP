@@ -116,8 +116,8 @@ public class Constant {
 	public static byte[] COMM_SPEED_VALUE_1 =   {(byte) 0xFF, (byte)0x05, (byte)0x01, (byte)0x32, (byte) 0xFE};//speed of motion motor
 	public static byte[] COMM_SPEED_VALUE_2 =   {(byte) 0xFF, (byte)0x05, (byte)0x02, (byte)0x32, (byte) 0xFE};//speed of suction motor
 
-    public static byte[] COMM_LED_ON =   {(byte) 0xFF, (byte)0x06, (byte)0x01, (byte)0x00, (byte) 0xFE};//speed of motion motor
-    public static byte[] COMM_LED_OFF =   {(byte) 0xFF, (byte)0x06, (byte)0x02, (byte)0x00, (byte) 0xFE};//speed of suction motor
+    public static byte[] COMM_LED_ON =   {(byte) 0xFF, (byte)0x06, (byte)0x01, (byte)0x00, (byte) 0xFE};//solenoid on
+    public static byte[] COMM_LED_OFF =   {(byte) 0xFF, (byte)0x06, (byte)0x02, (byte)0x00, (byte) 0xFE};//solenoid off
 
 	public static byte[] COMM_SELF_CHECK =     {(byte) 0xFF, (byte)0xEE, (byte)0xEE, 0x00, (byte) 0xFE};
 	public static byte[] COMM_SELF_CHECK_ALL = {(byte) 0xFF, (byte)0xEE, (byte)0xE0, 0x00, (byte) 0xFE};
