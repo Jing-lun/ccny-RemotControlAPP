@@ -67,6 +67,16 @@
         android:background="#00000000"
         android:src="@drawable/sym_stop" />
 
+    <ImageButton
+        android:id="@+id/btnLight"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/btnLeft"
+        android:layout_marginRight="-255dp"
+        android:layout_toLeftOf="@+id/btnRight"
+        android:background="#00000000"
+        android:src="@drawable/sym_stop" />
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="250dp"

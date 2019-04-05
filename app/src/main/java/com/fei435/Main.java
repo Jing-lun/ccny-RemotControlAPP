@@ -16,6 +16,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,6 +42,8 @@ import static com.fei435.Constant.COMM_SUCTION_OFF;
 import static com.fei435.Constant.COMM_SUCTION_ON;
 import static com.fei435.Constant.COMM_LED_ON;
 import static com.fei435.Constant.COMM_LED_OFF;
+import static com.fei435.Constant.COMM_LIGHT_ON;
+import static com.fei435.Constant.COMM_LIGHT_OFF;
 
 public class Main extends Activity implements
         com.fei435.SeekBar.OnSeekBarChangeListener,android.widget.SeekBar.OnSeekBarChangeListener  //分别是横向和纵向的SeekBar
@@ -73,6 +76,7 @@ public class Main extends Activity implements
     private ImageButton Servo;
     private ImageButton Suction;
     private ImageButton Led;
+    private ImageButton Light;
 
     private ImageView mAnimIndicator;
     private boolean bAnimationEnabled = true;
@@ -90,6 +94,8 @@ public class Main extends Activity implements
     private Drawable TurnRightoff;
     private Drawable Ledon;
     private Drawable Ledoff;
+    private Drawable Lighton;
+    private Drawable Lightoff;
     private Drawable buttonLenon;
     private Drawable buttonLenoff;
 
@@ -272,6 +278,7 @@ public class Main extends Activity implements
         Servo = (ImageButton)findViewById(R.id.btnServo);
         Suction = (ImageButton)findViewById(R.id.btnStop);
         Led = (ImageButton)findViewById(R.id.btnLed);
+        Light = (ImageButton)findViewById(R.id.btnLight);
 
         buttonCus1= (ImageButton)findViewById(R.id.ButtonCus1);
         buttonCus1.setOnClickListener(buttonCus1ClickListener);
@@ -310,6 +317,9 @@ public class Main extends Activity implements
 
         Ledon = getResources().getDrawable(R.drawable.sym_stop_1);
         Ledoff = getResources().getDrawable(R.drawable.sym_stop);
+
+        Lighton = getResources().getDrawable(R.drawable.sym_stop_1);
+        Lightoff = getResources().getDrawable(R.drawable.sym_stop);
 
         //显示视频及按钮的view,即MjpegView，backgroundView是MjpegView的实例
         backgroundView = (MjpegView)findViewById(R.id.mySurfaceView1);
@@ -485,7 +495,7 @@ public class Main extends Activity implements
             }
         });
 
-        // LED Start
+        // Solinoid Start
         Led.setOnTouchListener( new View.OnTouchListener(){
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getAction();
@@ -508,6 +518,36 @@ public class Main extends Activity implements
                             mWiFiCarControler.sendCommand(COMM_LED_OFF);   //Send Sever Position
                             Led.setImageDrawable(Ledoff);
                             Led.invalidateDrawable(Ledoff);
+                            break;
+                        }
+                }
+                return false;
+            }
+        });
+
+        // Light Start
+        Light.setOnTouchListener( new View.OnTouchListener(){
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch(action)
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        if(flagled == 0)
+                        {
+                            flagled = 1;
+                            mVibrator.vibrate(100);
+                            mWiFiCarControler.sendCommand(COMM_LIGHT_ON);   //light on
+                            Light.setImageDrawable(Lighton);
+                            Light.invalidateDrawable(Lighton);
+                            break;
+                        }
+                        else
+                        {
+                            flagled = 0;
+                            mVibrator.vibrate(100);
+                            mWiFiCarControler.sendCommand(COMM_LIGHT_OFF);   //light off
+                            Light.setImageDrawable(Lightoff);
+                            Light.invalidateDrawable(Lightoff);
                             break;
                         }
                 }
@@ -1100,6 +1140,13 @@ public class Main extends Activity implements
         return handled;
     }
 
+//    @Override
+//    public boolean onGenericMotionEvent(MotionEvent event) {
+//        if ((event.getSource() & InputDevice.SOURCE_JOYSTICK) != 0)
+//        {
+//
+//        }
+//    }
     //*******************
     //读取手柄方法完
     //********************
