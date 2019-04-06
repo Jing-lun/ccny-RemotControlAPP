@@ -34,7 +34,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import com.fei435.Constant.CommandArray;
 
 import static com.fei435.Constant.COMM_SERVO;
@@ -44,6 +43,8 @@ import static com.fei435.Constant.COMM_LED_ON;
 import static com.fei435.Constant.COMM_LED_OFF;
 import static com.fei435.Constant.COMM_LIGHT_ON;
 import static com.fei435.Constant.COMM_LIGHT_OFF;
+import static com.fei435.Constant.COMM_FRAME_LIGHT_ON;
+import static com.fei435.Constant.COMM_FRAME_LIGHT_OFF;
 
 public class Main extends Activity implements
         com.fei435.SeekBar.OnSeekBarChangeListener,android.widget.SeekBar.OnSeekBarChangeListener  //分别是横向和纵向的SeekBar
@@ -77,6 +78,7 @@ public class Main extends Activity implements
     private ImageButton Suction;
     private ImageButton Led;
     private ImageButton Light;
+    private ImageButton FrameLight;
 
     private ImageView mAnimIndicator;
     private boolean bAnimationEnabled = true;
@@ -96,6 +98,8 @@ public class Main extends Activity implements
     private Drawable Ledoff;
     private Drawable Lighton;
     private Drawable Lightoff;
+    private Drawable FrameLighton;
+    private Drawable FrameLightoff;
     private Drawable buttonLenon;
     private Drawable buttonLenoff;
 
@@ -136,6 +140,9 @@ public class Main extends Activity implements
     private WiFiCarController mWiFiCarControler = null;//网络连接线程的类
     private Context mContext;
     MjpegView backgroundView = null;
+
+    private InputDevice m_inputDevice;
+    private final String TAG = "TEST";
 
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg)
@@ -279,6 +286,7 @@ public class Main extends Activity implements
         Suction = (ImageButton)findViewById(R.id.btnStop);
         Led = (ImageButton)findViewById(R.id.btnLed);
         Light = (ImageButton)findViewById(R.id.btnLight);
+        FrameLight = (ImageButton)findViewById(R.id.btnFrameLight);
 
         buttonCus1= (ImageButton)findViewById(R.id.ButtonCus1);
         buttonCus1.setOnClickListener(buttonCus1ClickListener);
@@ -320,6 +328,9 @@ public class Main extends Activity implements
 
         Lighton = getResources().getDrawable(R.drawable.sym_stop_1);
         Lightoff = getResources().getDrawable(R.drawable.sym_stop);
+
+        FrameLighton = getResources().getDrawable(R.drawable.sym_stop_1);
+        FrameLightoff = getResources().getDrawable(R.drawable.sym_stop);
 
         //显示视频及按钮的view,即MjpegView，backgroundView是MjpegView的实例
         backgroundView = (MjpegView)findViewById(R.id.mySurfaceView1);
@@ -548,6 +559,36 @@ public class Main extends Activity implements
                             mWiFiCarControler.sendCommand(COMM_LIGHT_OFF);   //light off
                             Light.setImageDrawable(Lightoff);
                             Light.invalidateDrawable(Lightoff);
+                            break;
+                        }
+                }
+                return false;
+            }
+        });
+
+        // Frame Light Start
+        FrameLight.setOnTouchListener( new View.OnTouchListener(){
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch(action)
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        if(flagled == 0)
+                        {
+                            flagled = 1;
+                            mVibrator.vibrate(100);
+                            mWiFiCarControler.sendCommand(COMM_FRAME_LIGHT_ON);   //light on
+                            Light.setImageDrawable(FrameLighton);
+                            Light.invalidateDrawable(FrameLighton);
+                            break;
+                        }
+                        else
+                        {
+                            flagled = 0;
+                            mVibrator.vibrate(100);
+                            mWiFiCarControler.sendCommand(COMM_FRAME_LIGHT_OFF);   //light off
+                            Light.setImageDrawable(FrameLightoff);
+                            Light.invalidateDrawable(FrameLightoff);
                             break;
                         }
                 }
@@ -1142,10 +1183,92 @@ public class Main extends Activity implements
 
 //    @Override
 //    public boolean onGenericMotionEvent(MotionEvent event) {
-//        if ((event.getSource() & InputDevice.SOURCE_JOYSTICK) != 0)
-//        {
-//
+//        int eventSource = event.getSource();
+//        if ((((eventSource & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD) ||
+//                ((eventSource & InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK))
+//                && event.getAction() == MotionEvent.ACTION_MOVE) {
+//            int id = event.getDeviceId();
+//            if (-1 != id)
+//            {
+//                handleGenericMotionEvent(event);
+//            }
 //        }
+//        return false;
+//    }
+//
+//    private boolean handleGenericMotionEvent(MotionEvent event)
+//    {
+//        // Process all historical movement samples in the batch.
+//        final int historySize = event.getHistorySize();
+//        for (int i = 0; i < historySize; i++)
+//        {
+//            processJoystickInput(event, i);
+//        }
+//
+//        // Process the current movement sample in the batch.
+//        processJoystickInput(event, -1);
+//        return true;
+//    }
+//
+//    private void processJoystickInput(MotionEvent event, int historyPos)
+//    {
+//        // Get joystick position.
+//        // Many game pads with two joysticks report the position of the
+//        // second
+//        // joystick
+//        // using the Z and RZ axes so we also handle those.
+//        // In a real game, we would allow the user to configure the axes
+//        // manually.
+//        if (null == m_inputDevice)
+//        {
+//            m_inputDevice = event.getDevice();
+//        }
+//        float x = getCenteredAxis(event, m_inputDevice, MotionEvent.AXIS_X, historyPos);
+////        float x = event.getAxisValue(MotionEvent.AXIS_X);
+//        Log.e(TAG, "JoyStick Value: x " + x);
+//        if (x>=0 && x<=0.1)
+//        {
+//            mWiFiCarControler.sendCommand(Constant.COMM_STOP);    //发送右转命令
+//            TurnRight.setImageDrawable(TurnRightoff);
+//            TurnRight.invalidateDrawable(TurnRightoff);
+//        }
+//        if(x>0.1 && x<=1.0)
+//        {
+//            mWiFiCarControler.sendCommand(Constant.COMM_RIGHT);    //发送右转命令
+//            TurnRight.setImageDrawable(TurnRighton);
+//            TurnRight.invalidateDrawable(TurnRighton);
+//        }
+//
+//        float y = getCenteredAxis(event, m_inputDevice, MotionEvent.AXIS_Y, historyPos);
+//        if (y == 0)
+//        {
+//            y = getCenteredAxis(event, m_inputDevice, MotionEvent.AXIS_HAT_Y, historyPos);
+//        }
+//        if (y == 0)
+//        {
+//            y = getCenteredAxis(event, m_inputDevice, MotionEvent.AXIS_RZ, historyPos);
+//        }
+//    }
+//
+//    private float getCenteredAxis(MotionEvent event, InputDevice device, int axis, int historyPos)
+//    {
+//        final InputDevice.MotionRange range = device.getMotionRange(axis, event.getSource());
+//        if (range != null)
+//        {
+//            final float flat = range.getFlat();
+//            final float value = historyPos < 0 ? event.getAxisValue(axis)
+//                    : event.getHistoricalAxisValue(axis, historyPos);
+//
+//            // Ignore axis values that are within the 'flat' region of the
+//            // joystick axis center.
+//            // A joystick at rest does not always report an absolute position of
+//            // (0,0).
+//            if (Math.abs(value) > flat)
+//            {
+//                return value;
+//            }
+//        }
+//        return 0;
 //    }
     //*******************
     //读取手柄方法完

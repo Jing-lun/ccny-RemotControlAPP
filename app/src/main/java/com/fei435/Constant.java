@@ -122,6 +122,9 @@ public class Constant {
 	public static byte[] COMM_LIGHT_ON  =  {(byte) 0xFF, (byte)0x07, (byte)0x01, (byte)0x00, (byte) 0xFE};//light on
 	public static byte[] COMM_LIGHT_OFF =  {(byte) 0xFF, (byte)0x07, (byte)0x00, (byte)0x00, (byte) 0xFE};//light off
 
+	public static byte[] COMM_FRAME_LIGHT_ON  =  {(byte) 0xFF, (byte)0x08, (byte)0x01, (byte)0x00, (byte) 0xFE};//frame light on
+	public static byte[] COMM_FRAME_LIGHT_OFF =  {(byte) 0xFF, (byte)0x08, (byte)0x00, (byte)0x00, (byte) 0xFE};//frame light off
+
 	public static byte[] COMM_SELF_CHECK =     {(byte) 0xFF, (byte)0xEE, (byte)0xEE, 0x00, (byte) 0xFE};
 	public static byte[] COMM_SELF_CHECK_ALL = {(byte) 0xFF, (byte)0xEE, (byte)0xE0, 0x00, (byte) 0xFE};
 

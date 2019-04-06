@@ -5,7 +5,7 @@
     android:key="pref_screen">
     <PreferenceCategory android:title="Server Setting" android:key="pref_key_comm_settings">
         <EditTextPreference
-            android:defaultValue="192.168.50.171:8888"
+            android:defaultValue="192.168.0.100:8888"
             android:dialogTitle="Control IP:Port"
             android:key="pref_key_router_url"
             android:title="Control IP:Port" />
