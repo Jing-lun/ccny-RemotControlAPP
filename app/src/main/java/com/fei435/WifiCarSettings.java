@@ -15,6 +15,7 @@ public class WifiCarSettings extends PreferenceActivity implements OnSharedPrefe
 
 	private EditTextPreference mPrefRouterUrl;
 	private EditTextPreference mPrefCameraUrl;
+	private EditTextPreference mPrefSoundUrl;
 	private EditTextPreference mPrefRouterUrlTest;
 	private EditTextPreference mPrefCameraUrlTest;
 
@@ -31,6 +32,7 @@ public class WifiCarSettings extends PreferenceActivity implements OnSharedPrefe
 
 		mPrefRouterUrl = (EditTextPreference)findPreference(Constant.PREF_KEY_ROUTER_URL);
 		mPrefCameraUrl = (EditTextPreference)findPreference(Constant.PREF_KEY_CAMERA_URL);
+		mPrefSoundUrl = (EditTextPreference)findPreference(Constant.PREF_KEY_SOUND_URL);
 		mPrefRouterUrlTest = (EditTextPreference)findPreference(Constant.PREF_KEY_ROUTER_URL_TEST);
 		mPrefCameraUrlTest = (EditTextPreference)findPreference(Constant.PREF_KEY_CAMERA_URL_TEST);
 
@@ -48,6 +50,9 @@ public class WifiCarSettings extends PreferenceActivity implements OnSharedPrefe
 
 		String RouterUrl = settings.getString(Constant.PREF_KEY_ROUTER_URL, Constant.DEFAULT_VALUE_ROUTER_URL);
 		mPrefRouterUrl.setSummary(RouterUrl);
+
+		String SoundUrl = settings.getString(Constant.PREF_KEY_SOUND_URL, Constant.DEFAULT_VALUE_SOUND_URL);
+		mPrefRouterUrl.setSummary(SoundUrl);
 
 
 		String testCameraUrl = settings.getString(Constant.PREF_KEY_CAMERA_URL_TEST, Constant.DEFAULT_VALUE_CAMERA_URL_TEST);

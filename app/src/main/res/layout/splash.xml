@@ -13,7 +13,17 @@
             android:textStyle="bold" />
 
     </LinearLayout>
-    
+
+    <LinearLayout android:layout_gravity="top" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <ImageButton
+            android:id="@+id/btnLogo"
+            android:layout_width="130.0dip"
+            android:layout_height="130.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15.0dip"
+            android:background="@drawable/image" />
+    </LinearLayout>
+
   <LinearLayout android:layout_gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
 
@@ -33,7 +43,7 @@
     <LinearLayout android:layout_gravity="bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textViewAuthor" android:textSize="18.0sp" android:textStyle="bold" android:textColor="#ffffff00" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="version 1.1" />
+            android:id="@+id/textViewAuthor" android:textSize="18.0sp" android:textStyle="bold" android:textColor="#ffffff00" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="version 2.0" />
         
     </LinearLayout>    
 </FrameLayout>

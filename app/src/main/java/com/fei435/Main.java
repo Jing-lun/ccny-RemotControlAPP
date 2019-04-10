@@ -1,5 +1,17 @@
 package com.fei435;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.Socket;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -10,30 +22,25 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.fei435.Constant.CommandArray;
 
 import static com.fei435.Constant.COMM_SERVO;
@@ -61,9 +68,6 @@ public class Main extends Activity implements
     private final int MAX_GEAR_VALUE_2 = 100;
     private final int INIT_GEAR_VALUE_2 = 50;
 
-    private final int WARNING_ICON_OFF_DURATION_MSEC = 600;
-    private final int WARNING_ICON_ON_DURATION_MSEC = 800;
-
     public static int flagsuction = 0;
     public static int flagled = 0;
 
@@ -71,7 +75,6 @@ public class Main extends Activity implements
     private ImageButton BackWard;
     private ImageButton TurnLeft;
     private ImageButton TurnRight;
-    private ImageButton TakePicture;
 
     //插入我的按钮
     private ImageButton Servo;
@@ -80,11 +83,16 @@ public class Main extends Activity implements
     private ImageButton Light;
     private ImageButton FrameLight;
 
-    private ImageView mAnimIndicator;
     private boolean bAnimationEnabled = true;
-    private Drawable mWarningIcon;
     private TextView mLogText;
     private boolean bGravityDetectOn = false;
+
+    private ImageView imageView = null;
+    private ImageView SoundView = null;
+    private Bitmap bmp = null;
+    private Bitmap bmp_sound = null;
+    private Button VideoStream;
+    private Button SoundStream;
 
     private Drawable ForWardon;
     private Drawable ForWardoff;
@@ -100,8 +108,6 @@ public class Main extends Activity implements
     private Drawable Lightoff;
     private Drawable FrameLighton;
     private Drawable FrameLightoff;
-    private Drawable buttonLenon;
-    private Drawable buttonLenoff;
 
     //插入我的按钮
     private Drawable Servoon;
@@ -120,11 +126,9 @@ public class Main extends Activity implements
     private EditText editTextSpeed1;
     private EditText editTextSpeed2;
 
-    private ToggleButton gravityDetectToggle;
     private CheckBox speedChangeCheckBox;
 
     private ImageButton buttonCus1;
-    private ImageButton buttonLen;
     private boolean bCaptureOn = false;
 
     private boolean mQuitFlag = false;
@@ -141,13 +145,13 @@ public class Main extends Activity implements
     private Context mContext;
     MjpegView backgroundView = null;
 
-    private InputDevice m_inputDevice;
-    private final String TAG = "TEST";
-
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg)
         {
             //Log.i("Handle", "handle internal Message, id=" + msg.what);
+
+            imageView.setImageBitmap(bmp);
+            SoundView.setImageBitmap(bmp_sound);
 
             switch (msg.what) {
                 case Constant.MSG_ID_ERR_RECEIVE:
@@ -184,10 +188,6 @@ public class Main extends Activity implements
                 case Constant.MSG_ID_SET_UI_INFO:      //别的类给mLogText显示消息
                     String str = (String)msg.obj;
                     mLogText.setText(str);
-
-//    			Message msgStartCheck = new Message();
-//    			msgStartCheck.what = MSG_ID_START_CHECK;
-//    			mHandler.sendMessageDelayed(msgStartCheck, 3000);
 
                     Message msgHB1 = new Message();
                     msgHB1.what = Constant.MSG_ID_HEART_BREAK_RECEIVE;//启动心跳包检测循环
@@ -231,7 +231,7 @@ public class Main extends Activity implements
                     Log.i("heart", "handle MSG_ID_HEART_BREAK_RECEIVE :flag=" + bHeartBreakFlag);
 
                     if (mLastCounter == 0 && mHeartBreakCounter > 0) {
-                        startIconAnimation();
+//                        startIconAnimation();
                     }
                     mLastCounter = mHeartBreakCounter;
                     mHeartBreakCounter = 0;
@@ -273,12 +273,16 @@ public class Main extends Activity implements
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main); //用于显示布局
 
+        imageView = (ImageView)findViewById(R.id.btnImageView);
+        SoundView = (ImageView)findViewById(R.id.btnSoundView);
+        VideoStream = (Button)findViewById(R.id.btnVideoStream);
+        SoundStream = (Button)findViewById(R.id.btnSoundStream);
+
         //获取按钮
         ForWard= (ImageButton)findViewById(R.id.btnForward);
         TurnLeft= (ImageButton)findViewById(R.id.btnLeft);
         TurnRight=(ImageButton)findViewById(R.id.btnRight);
         BackWard= (ImageButton)findViewById(R.id.btnBack);
-        gravityDetectToggle = (ToggleButton)findViewById(R.id.gravityToggleButton);
         speedChangeCheckBox = (CheckBox)findViewById(R.id.speedChangeCheckbox);
 
         //我的按钮
@@ -290,17 +294,6 @@ public class Main extends Activity implements
 
         buttonCus1= (ImageButton)findViewById(R.id.ButtonCus1);
         buttonCus1.setOnClickListener(buttonCus1ClickListener);
-        //buttonCus1.setOnLongClickListener(buttonCus1ClickListener2);
-
-        buttonLen= (ImageButton)findViewById(R.id.btnLen);
-        buttonLen.setOnClickListener(buttonLenClickListener);
-        buttonLen.setLongClickable(true);
-
-
-        TakePicture = (ImageButton)findViewById(R.id.ButtonTakePic);
-        TakePicture.setOnClickListener(buttonTakePicClickListener);//buttonTakePicClickListener就是事件发生后调用的处理函数
-        mAnimIndicator = (ImageView)findViewById(R.id.btnIndicator);
-        mWarningIcon = getResources().getDrawable(R.drawable.sym_indicator1);
 
         ForWardon = getResources().getDrawable(R.drawable.sym_forward_1);
         ForWardoff = getResources().getDrawable(R.drawable.sym_forward);
@@ -313,9 +306,6 @@ public class Main extends Activity implements
 
         BackWardon = getResources().getDrawable(R.drawable.sym_backward_1);
         BackWardoff = getResources().getDrawable(R.drawable.sym_backward);
-
-        buttonLenon = getResources().getDrawable(R.drawable.sym_light);
-        buttonLenoff = getResources().getDrawable(R.drawable.sym_light_off);
 
         Servoon = getResources().getDrawable(R.drawable.sym_stop_1);
         Servooff = getResources().getDrawable(R.drawable.sym_stop);
@@ -362,9 +352,79 @@ public class Main extends Activity implements
         editTextSpeed2 = (EditText)findViewById(R.id.editTextSpeed2);
         editTextSpeed2.setText(INIT_GEAR_VALUE_2+"");
 
+        VideoStream.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        Socket socket = null;
+                            try {
+                                socket = new Socket("192.168.0.115", 8000);
+                                while (true) {
+                                DataInputStream dataInput = new DataInputStream(
+                                        socket.getInputStream());
+                                int size = dataInput.readInt();
+                                byte[] data = new byte[size];
+                                // dataInput.readFully(data);
+                                int len = 0;
+                                while (len < size) {
+                                    len += dataInput.read(data, len, size - len);
+                                }
 
+                                ByteArrayOutputStream outPut = new ByteArrayOutputStream();
+                                bmp = BitmapFactory.decodeByteArray(data, 0,
+                                        data.length);
+                                bmp.compress(CompressFormat.PNG, 90, outPut);
+                                //imageView.setImageBitmap(bmp);
+                                mHandler.obtainMessage().sendToTarget();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                    }
+                };
+                t.start();
+            }
+        });
 
-        buttonLen.setKeepScreenOn(true); //保持屏幕长亮
+        SoundStream.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Thread t = new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        Socket socket = null;
+                        try {
+                            socket = new Socket("192.168.0.115", 8080);
+                            while (true) {
+                                DataInputStream dataInput = new DataInputStream(
+                                        socket.getInputStream());
+                                int size = dataInput.readInt();
+                                byte[] data = new byte[size];
+                                // dataInput.readFully(data);
+                                int len = 0;
+                                while (len < size) {
+                                    len += dataInput.read(data, len, size - len);
+                                }
+
+                                ByteArrayOutputStream outPut = new ByteArrayOutputStream();
+                                bmp_sound = BitmapFactory.decodeByteArray(data, 0,
+                                        data.length);
+                                bmp_sound.compress(CompressFormat.PNG, 90, outPut);
+                                //SoundView.setImageBitmap(bmp);
+                                mHandler.obtainMessage().sendToTarget();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                t.start();
+            }
+        });
 
         ForWard.setOnTouchListener( new View.OnTouchListener(){
             public boolean onTouch(View v, MotionEvent event) {
@@ -578,8 +638,8 @@ public class Main extends Activity implements
                             flagled = 1;
                             mVibrator.vibrate(100);
                             mWiFiCarControler.sendCommand(COMM_FRAME_LIGHT_ON);   //light on
-                            Light.setImageDrawable(FrameLighton);
-                            Light.invalidateDrawable(FrameLighton);
+                            FrameLight.setImageDrawable(FrameLighton);
+                            FrameLight.invalidateDrawable(FrameLighton);
                             break;
                         }
                         else
@@ -587,8 +647,8 @@ public class Main extends Activity implements
                             flagled = 0;
                             mVibrator.vibrate(100);
                             mWiFiCarControler.sendCommand(COMM_FRAME_LIGHT_OFF);   //light off
-                            Light.setImageDrawable(FrameLightoff);
-                            Light.invalidateDrawable(FrameLightoff);
+                            FrameLight.setImageDrawable(FrameLightoff);
+                            FrameLight.invalidateDrawable(FrameLightoff);
                             break;
                         }
                 }
@@ -649,16 +709,16 @@ public class Main extends Activity implements
         };
         mSensorMgr.registerListener (lsn, sensor, SensorManager.SENSOR_DELAY_GAME);
 
-        gravityDetectToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                                           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                                               if (isChecked) {
-                                                                   bGravityDetectOn = true;
-                                                               }else {
-                                                                   bGravityDetectOn = false;
-                                                               }
-                                                           }
-                                                       }
-        );
+//        gravityDetectToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                                                           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                                                               if (isChecked) {
+//                                                                   bGravityDetectOn = true;
+//                                                               }else {
+//                                                                   bGravityDetectOn = false;
+//                                                               }
+//                                                           }
+//                                                       }
+//        );
 
         speedChangeCheckBox.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener()
         {
@@ -720,46 +780,45 @@ public class Main extends Activity implements
             }
         });
         //connect
-        //connectToRouter(m4test);   //连接路由器  这里不用再连接了   在onResume中连接
-        //245368746(小白热爱的QQ)
 
-        WebView mWebView=(WebView) findViewById(R.id.webview);
 
-        //allow zoom in and out controls
-        mWebView.getSettings().setJavaScriptEnabled(true);
-
-        //zoom out to best fit the screen
-        mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setUseWideViewPort(true);
-
-        //load the stream link
-         mWebView.loadUrl("http://192.168.0.106:8080/stream_viewer?topic=/camera/color/image_rect_color");
-
-        //set the view to be explicitly on the webview widget
-        mWebView.setWebViewClient(new InsideWebViewClient());
+//        WebView mWebView=(WebView) findViewById(R.id.webview);
+//
+//        //allow zoom in and out controls
+//        mWebView.getSettings().setJavaScriptEnabled(true);
+//
+//        //zoom out to best fit the screen
+//        mWebView.getSettings().setLoadWithOverviewMode(true);
+//        mWebView.getSettings().setUseWideViewPort(true);
+//
+//        //load the stream link
+//         mWebView.loadUrl("http://192.168.0.106:8080/stream_viewer?topic=/camera/color/image_rect_color");
+//
+//        //set the view to be explicitly on the webview widget
+//        mWebView.setWebViewClient(new InsideWebViewClient());
     }
 
 
-    private OnClickListener buttonLenClickListener = new OnClickListener() {
-        public void onClick(View arg0) {
-            mVibrator.vibrate(100);
-            if (bCaptureOn) {
-                bCaptureOn = false;
-                //sendCommand(COMM_LEN_OFF);
-                Log.i("ScreenCapture", "button turn off capture clicked");
-                backgroundView.toggleVideoCapture();
-                buttonLen.setImageDrawable(buttonLenoff);
-                buttonLen.invalidateDrawable(buttonLenon);
-            } else  {
-                bCaptureOn = true;
-                //sendCommand(COMM_LEN_ON);
-                Log.i("ScreenCapture", "button turn on capture clicked");
-                backgroundView.toggleVideoCapture();
-                buttonLen.setImageDrawable(buttonLenon);
-                buttonLen.invalidateDrawable(buttonLenon);
-            }
-        }
-    };
+//    private OnClickListener buttonLenClickListener = new OnClickListener() {
+//        public void onClick(View arg0) {
+//            mVibrator.vibrate(100);
+//            if (bCaptureOn) {
+//                bCaptureOn = false;
+//                //sendCommand(COMM_LEN_OFF);
+//                Log.i("ScreenCapture", "button turn off capture clicked");
+//                backgroundView.toggleVideoCapture();
+//                buttonLen.setImageDrawable(buttonLenoff);
+//                buttonLen.invalidateDrawable(buttonLenon);
+//            } else  {
+//                bCaptureOn = true;
+//                //sendCommand(COMM_LEN_ON);
+//                Log.i("ScreenCapture", "button turn on capture clicked");
+//                backgroundView.toggleVideoCapture();
+//                buttonLen.setImageDrawable(buttonLenon);
+//                buttonLen.invalidateDrawable(buttonLenon);
+//            }
+//        }
+//    };
 
     //照相
     private OnClickListener buttonTakePicClickListener = new OnClickListener() {
@@ -932,33 +991,33 @@ public class Main extends Activity implements
     private boolean mIconAnimationState = false;
 
     /** Icon animation handler for flashing warning alerts. */
-    private final Handler mAnimationHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (mIconAnimationState) {
-                mAnimIndicator.setAlpha(255);
-                if (isIconAnimationEnabled()) {
-                    mAnimationHandler.sendEmptyMessageDelayed(0, WARNING_ICON_ON_DURATION_MSEC);
-                }
-            } else {
-                mAnimIndicator.setAlpha(0);
-                if (isIconAnimationEnabled()) {
-                    mAnimationHandler.sendEmptyMessageDelayed(0, WARNING_ICON_OFF_DURATION_MSEC);
-                }
-            }
-            mIconAnimationState = !mIconAnimationState;
-            mAnimIndicator.invalidateDrawable(mWarningIcon);
-        }
-    };
-
-    private void startIconAnimation() {
-        Log.i("Animation", "startIconAnimation handler : " + mAnimationHandler);
-        if (mAnimIndicator != null) {
-            mAnimIndicator.setImageDrawable(mWarningIcon);
-        }
-        if (isIconAnimationEnabled())
-            mAnimationHandler.sendEmptyMessageDelayed(0, WARNING_ICON_ON_DURATION_MSEC);
-    }
+//    private final Handler mAnimationHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            if (mIconAnimationState) {
+//                mAnimIndicator.setAlpha(255);
+//                if (isIconAnimationEnabled()) {
+//                    mAnimationHandler.sendEmptyMessageDelayed(0, WARNING_ICON_ON_DURATION_MSEC);
+//                }
+//            } else {
+//                mAnimIndicator.setAlpha(0);
+//                if (isIconAnimationEnabled()) {
+//                    mAnimationHandler.sendEmptyMessageDelayed(0, WARNING_ICON_OFF_DURATION_MSEC);
+//                }
+//            }
+//            mIconAnimationState = !mIconAnimationState;
+//            mAnimIndicator.invalidateDrawable(mWarningIcon);
+//        }
+//    };
+//
+//    private void startIconAnimation() {
+//        Log.i("Animation", "startIconAnimation handler : " + mAnimationHandler);
+//        if (mAnimIndicator != null) {
+//            mAnimIndicator.setImageDrawable(mWarningIcon);
+//        }
+//        if (isIconAnimationEnabled())
+//            mAnimationHandler.sendEmptyMessageDelayed(0, WARNING_ICON_ON_DURATION_MSEC);
+//    }
 
     private void handleHeartBreak() {
         Log.i("heart", "handleHeartBreak");
@@ -967,7 +1026,7 @@ public class Main extends Activity implements
     }
 
     private void stopIconAnimation() {
-        mAnimationHandler.removeMessages(0);
+//        mAnimationHandler.removeMessages(0);
     }
 
     public void onProgressChanged(com.fei435.SeekBar seekBar, int progress, boolean fromUserh) {

@@ -10,15 +10,19 @@
             android:key="pref_key_router_url"
             android:title="Control IP:Port" />
         <EditTextPreference
-            android:title="Video Address"
+            android:title="Video Streaming Address"
             android:key="pref_key_camera_url"
-            android:defaultValue="http://192.168.0.102:5000"/>
+            android:defaultValue="http://192.168.0.115:8000"/>
+        <EditTextPreference
+            android:title="Sound Streaming Address"
+            android:key="pref_key_sound_url"
+            android:defaultValue="http://192.168.0.115:8080"/>
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="调试" android:key="pref_key_test_settings">
-        <CheckBoxPreference android:title="是否开启调试模式" 
+    <PreferenceCategory android:title="Debug" android:key="pref_key_test_settings">
+        <CheckBoxPreference android:title="是否开启调试模式"
             android:key="pref_key_test_enabled"/>
-        <EditTextPreference android:title="控制IP:端口(调试模式)" 
+        <EditTextPreference android:title="控制IP:端口(调试模式)"
             android:key="pref_key_router_url_test"
             android:defaultValue="192.168.128.135:2001"/>
         <EditTextPreference android:title="视频地址(调试模式)"
@@ -26,7 +30,7 @@
             android:defaultValue="http://192.168.128.135:8080/?action=stream"/>
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="大灯设置" 
+    <PreferenceCategory android:title="大灯设置"
         android:key="pref_key_len_settings">
         <EditTextPreference
             android:defaultValue="FF040100FE"

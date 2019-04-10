@@ -62,7 +62,7 @@
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_alignTop="@+id/btnLeft"
-        android:layout_marginRight="-195dp"
+        android:layout_marginRight="-125dp"
         android:layout_toLeftOf="@+id/btnRight"
         android:background="#00000000"
         android:src="@drawable/sym_stop" />
@@ -72,7 +72,7 @@
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_alignTop="@+id/btnLeft"
-        android:layout_marginRight="-255dp"
+        android:layout_marginRight="-175dp"
         android:layout_toLeftOf="@+id/btnRight"
         android:background="#00000000"
         android:src="@drawable/sym_stop" />
@@ -81,20 +81,43 @@
         android:id="@+id/btnFrameLight"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_alignTop="@+id/btnLight"
-        android:layout_marginTop="-45dp"
-        android:layout_marginRight="-255dp"
+        android:layout_alignTop="@+id/btnLeft"
+        android:layout_marginRight="-225dp"
         android:layout_toLeftOf="@+id/btnRight"
         android:background="#00000000"
         android:src="@drawable/sym_stop" />
 
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="250dp"
-        android:layout_height="175dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="50dp"
-        android:layout_alignRight="@id/btnLen" />
+    <ImageView
+        android:id="@+id/btnImageView"
+        android:layout_width="180dp"
+        android:layout_height="155dp"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="50dp" />
+
+    <ImageView
+        android:id="@+id/btnSoundView"
+        android:layout_width="180dp"
+        android:layout_height="155dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:id="@+id/btnVideoStream"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+        />
+
+    <Button
+        android:id="@+id/btnSoundStream"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="263dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+        />
 
     <ImageButton
         android:id="@+id/ButtonCus1"
@@ -105,57 +128,15 @@
         android:background="#00000000"
         android:src="@drawable/sym_setting" />
 
-    <ImageButton
-        android:id="@+id/btnLen"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="#00000000"
-        android:src="@drawable/sym_light_off" />
-
     <TextView
         android:id="@+id/logTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnIndicator"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="false"
         android:layout_marginBottom="4dp"
-        android:layout_toLeftOf="@+id/btnLen"
-        android:layout_toRightOf="@+id/btnIndicator"
+        android:layout_marginLeft="180dp"
         android:text=""
-        android:textSize="10sp" />
-
-    <ImageView
-        android:id="@+id/btnIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/ButtonTakePic"
-        android:background="#00000000"
-        android:scaleType="center"
-        android:src="@drawable/sym_indicator" />
-
-    <ImageButton
-        android:id="@+id/ButtonTakePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/gravityToggleButton"
-        android:background="#00000000"
-        android:src="@drawable/take_pic" />
-
-    <ToggleButton
-        android:id="@+id/gravityToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/ButtonCus1"
-        android:alpha="0.7"
-        android:checked="false"
-        android:textOff="感应关"
-        android:textOn="感应开"
         android:textSize="10sp" />
 
     <CheckBox
@@ -163,7 +144,7 @@
         android:layout_width="wrap_content"
         android:layout_height="37dp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf ="@+id/btnIndicator"
+        android:layout_marginLeft="50dp"
         android:checked="false"
         android:text="speed setting" />
 
@@ -188,13 +169,13 @@
                 android:layout_marginTop="4dp"
                 android:digits="1234567890"
                 android:ems="10"
-                android:hint="运动电机"
-                android:textSize="10sp"
+                android:hint="Motion Motor"
+                android:textSize="12sp"
                 android:visibility="invisible" />
 
             <SeekBar
                 android:id="@+id/seekBarSpeed1"
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:progress="20"
                 android:layout_marginLeft="8dp"
@@ -216,13 +197,13 @@
                 android:layout_marginTop="4dp"
                 android:digits="1234567890"
                 android:ems="10"
-                android:hint="吸气电机"
-                android:textSize="10sp"
+                android:hint="Suction Motor"
+                android:textSize="12sp"
                 android:visibility="invisible" />
 
             <SeekBar
                 android:id="@+id/seekBarSpeed2"
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:progress="20"
                 android:layout_marginLeft="8dp"
@@ -238,7 +219,7 @@
         android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/btnLen"
+        android:layout_marginLeft="190dp"
         android:background="#00000000"
         android:src="@drawable/sym_stop" />
 

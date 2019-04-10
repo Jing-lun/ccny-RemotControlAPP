@@ -180,12 +180,12 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                     }catch (ClientProtocolException e) {
                                         mRun = false;  //退出线程
                                         Log.i("MjpegView error", "MjpegView error"+e.toString());
-                                        setUiInfo("获取视视频流失败");
+//                                        setUiInfo("获取视视频流失败");
                                         break;  //跳出while循环
                                     } catch (IOException e) {
                                         mRun = false;  //退出线程
                                         Log.i("MjpegView error", "MjpegView error"+e.toString());
-                                        setUiInfo("获取视视频流失败");
+//                                        setUiInfo("获取视视频流失败");
                                         break;  //跳出while循环
                                     }
                                 }

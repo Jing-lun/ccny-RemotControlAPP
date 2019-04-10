@@ -5,6 +5,7 @@ import android.util.Log;
 public class Constant {
 	public static final String PREF_KEY_ROUTER_URL = "pref_key_router_url";
 	public static final String PREF_KEY_CAMERA_URL = "pref_key_camera_url";
+	public static final String PREF_KEY_SOUND_URL = "pref_key_sound_url";
 
 	public static final String PREF_KEY_TEST_MODE_ENABLED = "pref_key_test_enabled";
 	public static final String PREF_KEY_ROUTER_URL_TEST = "pref_key_router_url_test";
@@ -18,6 +19,8 @@ public class Constant {
 	//TODO:项目完成后更改这些值
 	public static final String DEFAULT_VALUE_CAMERA_URL = "http://192.168.128.135:8080/?action=stream";
 	public static final String DEFAULT_VALUE_ROUTER_URL = "192.168.128.135:2001";
+	public static final String DEFAULT_VALUE_SOUND_URL = "192.168.128.135:2001";
+
 	public static final String DEFAULT_VALUE_CAMERA_URL_TEST = "http://192.168.128.135:8080/?action=stream";
 	public static final String DEFAULT_VALUE_ROUTER_URL_TEST = "192.168.128.135:2001";
 

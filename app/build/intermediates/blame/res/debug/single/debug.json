@@ -16,6 +16,10 @@
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/sym_forward_1.png"
     },
     {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_yingyongguanli.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/yingyongguanli.png"
+    },
+    {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/layout_splash.xml.flat",
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/layout/splash.xml"
     },
@@ -38,6 +42,10 @@
     {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_sym_left.png.flat",
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/sym_left.png"
+    },
+    {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_jiantou_xia.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/jiantou_xia.png"
     },
     {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_bg_bar.xml.flat",
@@ -64,8 +72,20 @@
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/sym_right_1.png"
     },
     {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_image.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/image.png"
+    },
+    {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_sym_stop.png.flat",
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/sym_stop.png"
+    },
+    {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_jiantou_shang.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/jiantou_shang.png"
+    },
+    {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_jiantou_zuo.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/jiantou_zuo.png"
     },
     {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_sym_indicator.png.flat",
@@ -108,6 +128,14 @@
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/bar_up.png"
     },
     {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_danxuanweixuanzhong.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/danxuanweixuanzhong.png"
+    },
+    {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_duoxuanweixuanzhong.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/duoxuanweixuanzhong.png"
+    },
+    {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_seekbar_style.xml.flat",
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/seekbar_style.xml"
     },
@@ -116,12 +144,28 @@
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/pic_start.png"
     },
     {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_jiantou_you.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/jiantou_you.png"
+    },
+    {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_danxuanxuanzhong.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/danxuanxuanzhong.png"
+    },
+    {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_sym_backward_1.png.flat",
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/sym_backward_1.png"
     },
     {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable-hdpi_icon.png.flat",
         "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable-hdpi/icon.png"
+    },
+    {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_caidan.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/caidan.png"
+    },
+    {
+        "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_duoxuanxuanzhong.png.flat",
+        "source": "/home/jinglun/ClimbRobotRomoteController-fjl/app/src/main/res/drawable/duoxuanxuanzhong.png"
     },
     {
         "merged": "/home/jinglun/ClimbRobotRomoteController-fjl/app/build/intermediates/res/merged/debug/drawable_thumb_up.png.flat",
