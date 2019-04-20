@@ -2,6 +2,9 @@ package com.fei435;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.Socket;
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -376,7 +379,7 @@ public class Main extends Activity implements
                                 ByteArrayOutputStream outPut = new ByteArrayOutputStream();
                                 bmp = BitmapFactory.decodeByteArray(data, 0,
                                         data.length);
-                                bmp.compress(CompressFormat.PNG, 90, outPut);
+                                bmp.compress(CompressFormat.PNG, 100, outPut);
                                 //imageView.setImageBitmap(bmp);
                                 mHandler.obtainMessage().sendToTarget();
                                 }
@@ -413,7 +416,7 @@ public class Main extends Activity implements
                                 ByteArrayOutputStream outPut = new ByteArrayOutputStream();
                                 bmp_sound = BitmapFactory.decodeByteArray(data, 0,
                                         data.length);
-                                bmp_sound.compress(CompressFormat.PNG, 90, outPut);
+                                bmp_sound.compress(CompressFormat.PNG, 100, outPut);
                                 //SoundView.setImageBitmap(bmp);
                                 mHandler.obtainMessage().sendToTarget();
                             }
@@ -425,6 +428,33 @@ public class Main extends Activity implements
                 t.start();
             }
         });
+
+//        SoundStream.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Thread t = new Thread() {
+//                    @Override
+//                    public void run() {
+//                        super.run();
+//                        boolean run = true;
+//                        try
+//                        {
+//                            DatagramSocket udpSocket = new DatagramSocket(8080, InetAddress.getLocalHost());
+//                            while (run) {
+//                                byte[] message = new byte[8000];
+//                                DatagramPacket packet = new DatagramPacket(message, message.length);
+//                                udpSocket.receive(packet);
+//                            }
+//                        }
+//                        catch (IOException e)
+//                        {
+//                            run = false;
+//                        }
+//                    }
+//                };
+//                t.start();
+//            }
+//        });
 
         ForWard.setOnTouchListener( new View.OnTouchListener(){
             public boolean onTouch(View v, MotionEvent event) {
